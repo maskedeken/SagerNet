@@ -213,6 +213,7 @@ object Key {
     const val TASKER_PROFILE = "taskerProfile"
     const val TASKER_PROFILE_ID = "taskerProfileId"
 
+    const val FINGERPRINT = "fingerprint"
 }
 
 object TunImplementation {
