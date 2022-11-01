@@ -189,5 +189,7 @@ fun HysteriaBean.buildHysteriaConfig(port: Int, cacheFile: (() -> File)?): Strin
         if (disableMtuDiscovery) it["disable_mtu_discovery"] = true
 
         it["resolver"] = "udp://127.0.0.1:" + DataStore.localDNSPort
+        it["retry"] = -1    // make hysteria client not to quit even if it fails to initialize
+        it["retry_interval"] = 5
     }.toStringPretty()
 }
