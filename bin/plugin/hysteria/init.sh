@@ -9,5 +9,5 @@ CURR="plugin/hysteria"
 CURR_PATH="$PROJECT/$CURR"
 
 git submodule update --init "$CURR/*"
-cd $CURR_PATH/src/main/go/hysteria
+cd $CURR_PATH/src/main/go/hysteria/app
 go mod download -x
