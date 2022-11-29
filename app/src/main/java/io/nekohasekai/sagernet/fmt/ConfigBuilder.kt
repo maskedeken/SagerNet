@@ -429,6 +429,14 @@ fun buildV2RayConfig(
                                         })
                                 })
                         }
+                        if (currentDomainStrategy == "AsIs") {
+                            currentDomainStrategy = when {
+                                ipv6Mode == IPv6Mode.DISABLE -> "UseIPv4"
+                                ipv6Mode == IPv6Mode.PREFER -> "PreferIPv6"
+                                ipv6Mode == IPv6Mode.ONLY -> "UseIPv6"
+                                else -> "PreferIPv4"
+                            }
+                        }
                     } else {
                         currentOutbound.apply {
                             val keepAliveInterval = DataStore.tcpKeepAliveInterval
