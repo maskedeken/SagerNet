@@ -429,9 +429,6 @@ fun buildV2RayConfig(
                                         })
                                 })
                         }
-                        if (currentDomainStrategy == "AsIs") {
-                            currentDomainStrategy = "UseIP"
-                        }
                     } else {
                         currentOutbound.apply {
                             val keepAliveInterval = DataStore.tcpKeepAliveInterval
@@ -536,7 +533,12 @@ fun buildV2RayConfig(
                                                 PacketAddrType.Packet_VALUE -> {
                                                     packetEncoding = "packet"
                                                     if (currentDomainStrategy == "AsIs") {
-                                                        currentDomainStrategy = "UseIP"
+                                                        currentDomainStrategy = when {
+                                                            ipv6Mode == IPv6Mode.DISABLE -> "UseIPv4"
+                                                            ipv6Mode == IPv6Mode.PREFER -> "PreferIPv6"
+                                                            ipv6Mode == IPv6Mode.ONLY -> "UseIPv6"
+                                                            else -> "PreferIPv4"
+                                                        }
                                                     }
                                                 }
                                                 PacketAddrType.XUDP_VALUE -> packetEncoding = "xudp"
