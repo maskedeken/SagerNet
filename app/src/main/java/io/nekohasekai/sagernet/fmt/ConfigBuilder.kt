@@ -172,12 +172,19 @@ fun buildV2RayConfig(
     val trafficStatistics = !forTest && DataStore.profileTrafficStatistics
     val needIncludeSelf = DataStore.tunImplementation == TunImplementation.SYSTEM
 
+    // v2sekai's outbound domainStrategy
+    fun genDomainStrategy(): String {
+        return when {
+            ipv6Mode == IPv6Mode.DISABLE -> "UseIPv4"
+            ipv6Mode == IPv6Mode.PREFER -> "PreferIPv6"
+            ipv6Mode == IPv6Mode.ONLY -> "UseIPv6"
+            else -> "PreferIPv4"
+        }
+    }
+
     val outboundDomainStrategy = when {
         destinationOverride && !resolveDestination -> "AsIs"
-        ipv6Mode == IPv6Mode.DISABLE -> "UseIPv4"
-        ipv6Mode == IPv6Mode.PREFER -> "PreferIPv6"
-        ipv6Mode == IPv6Mode.ONLY -> "UseIPv6"
-        else -> "PreferIPv4"
+        else -> genDomainStrategy()
     }
 
     var dumpUid = false
@@ -430,12 +437,7 @@ fun buildV2RayConfig(
                                 })
                         }
                         if (currentDomainStrategy == "AsIs") {
-                            currentDomainStrategy = when {
-                                ipv6Mode == IPv6Mode.DISABLE -> "UseIPv4"
-                                ipv6Mode == IPv6Mode.PREFER -> "PreferIPv6"
-                                ipv6Mode == IPv6Mode.ONLY -> "UseIPv6"
-                                else -> "PreferIPv4"
-                            }
+                            currentDomainStrategy = genDomainStrategy()
                         }
                     } else {
                         currentOutbound.apply {
@@ -541,12 +543,7 @@ fun buildV2RayConfig(
                                                 PacketAddrType.Packet_VALUE -> {
                                                     packetEncoding = "packet"
                                                     if (currentDomainStrategy == "AsIs") {
-                                                        currentDomainStrategy = when {
-                                                            ipv6Mode == IPv6Mode.DISABLE -> "UseIPv4"
-                                                            ipv6Mode == IPv6Mode.PREFER -> "PreferIPv6"
-                                                            ipv6Mode == IPv6Mode.ONLY -> "UseIPv6"
-                                                            else -> "PreferIPv4"
-                                                        }
+                                                        currentDomainStrategy = genDomainStrategy()
                                                     }
                                                 }
                                                 PacketAddrType.XUDP_VALUE -> packetEncoding = "xudp"
