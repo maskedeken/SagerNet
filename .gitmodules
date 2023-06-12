@@ -37,3 +37,5 @@
 [submodule "plugin/tuic/src/main/rust/tuic"]
 	path = plugin/tuic/src/main/rust/tuic
 	url = https://github.com/MatsuriDayo/tuic
+[submodule "plugin\\tuic\\src\\main\\rust\\tuic"]
+	url = https://github.com/EAimTY/tuic
