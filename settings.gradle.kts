@@ -15,7 +15,7 @@ when {
         include(":plugin:trojan-go")
         include(":plugin:hysteria")
         include(":plugin:mieru")
-        include(":plugin:tuic")
+        include(":plugin:tuic-v5")
     }
     buildPlugin == "none" -> {
     }

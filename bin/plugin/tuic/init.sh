@@ -2,7 +2,7 @@
 
 source "bin/init/env.sh"
 
-CURR="plugin/tuic"
+CURR="plugin/tuic-v5"
 CURR_PATH="$PROJECT/$CURR"
 
 git submodule update --init "$CURR/*"

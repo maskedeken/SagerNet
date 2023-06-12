@@ -247,13 +247,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Fetch Status
-        run: git submodule status 'plugin/tuic/*' > tuic_status
+        run: git submodule status 'plugin/tuic-v5/*' > tuic_status
       - name: Tuic Cache
         id: cache
         uses: actions/cache@v3
         with:
           path: |
-            plugin/tuic/src/main/jniLibs
+            plugin/tuic-v5/src/main/jniLibs
           key: ${{ hashFiles('.github/workflows/*', 'bin/lib/tuic/*', 'tuic_status') }}
       - name: Install toolchain
         run: |

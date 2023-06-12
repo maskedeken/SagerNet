@@ -32,13 +32,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Fetch Status
-        run: git submodule status 'plugin/tuic/*' > tuic_status
+        run: git submodule status 'plugin/tuic-v5/*' > tuic_status
       - name: TUIC Cache
         id: cache
         uses: actions/cache@v3
         with:
           path: |
-            plugin/tuic/src/main/jniLibs
+            plugin/tuic-v5/src/main/jniLibs
           key: ${{ hashFiles('.github/workflows/*', 'bin/lib/tuic/*', 'tuic_status') }}
       - name: Gradle cache
         uses: actions/cache@v3
@@ -66,12 +66,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Fetch Status
-        run: git submodule status 'plugin/tuic/*' > tuic_status
+        run: git submodule status 'plugin/tuic-v5/*' > tuic_status
       - name: TUIC Cache
         uses: actions/cache@v3
         with:
           path: |
-            plugin/tuic/src/main/jniLibs
+            plugin/tuic-v5/src/main/jniLibs
           key: ${{ hashFiles('.github/workflows/*', 'bin/lib/tuic/*', 'tuic_status') }}
       - name: Gradle cache
         uses: actions/cache@v3
@@ -81,14 +81,14 @@ jobs:
       - name: Release Build
         env:
           SKIP_BUILD: on
-          BUILD_PLUGIN: tuic
+          BUILD_PLUGIN: tuic-v5
         run: |
           echo "sdk.dir=${ANDROID_HOME}" > local.properties
           echo "ndk.dir=${ANDROID_HOME}/ndk/25.0.8775105" >> local.properties
           export LOCAL_PROPERTIES="${{ secrets.LOCAL_PROPERTIES }}"
           ./run init action library
-          ./gradlew :plugin:tuic:assembleOssRelease
-          APK=$(find plugin/tuic/build/outputs/apk -name '*arm64-v8a*.apk')
+          ./gradlew :plugin:tuic-v5:assembleOssRelease
+          APK=$(find plugin/tuic-v5/build/outputs/apk -name '*arm64-v8a*.apk')
           APK=$(dirname "$APK")
           echo "APK=$APK" >> $GITHUB_ENV
       - uses: actions/upload-artifact@v3
@@ -174,12 +174,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Fetch Status
-        run: git submodule status 'plugin/tuic/*' > tuic_status
+        run: git submodule status 'plugin/tuic-v5/*' > tuic_status
       - name: Hysteria Cache
         uses: actions/cache@v3
         with:
           path: |
-            plugin/tuic/src/main/jniLibs
+            plugin/tuic-v5/src/main/jniLibs
           key: ${{ hashFiles('.github/workflows/*', 'bin/lib/tuic/*', 'tuic_status') }}
       - name: Gradle cache
         uses: actions/cache@v3
@@ -189,7 +189,7 @@ jobs:
       - name: Release Build
         env:
           SKIP_BUILD: on
-          BUILD_PLUGIN: tuic
+          BUILD_PLUGIN: tuic-v5
         run: |
           echo "sdk.dir=${ANDROID_HOME}" > local.properties
           echo "ndk.dir=${ANDROID_HOME}/ndk/25.0.8775105" >> local.properties
@@ -198,4 +198,4 @@ jobs:
           ${{ secrets.ANDROID_PUBLISHER_CREDENTIALS }}"
           EOF
           ./run init action library
-          ./gradlew :plugin:tuic:publishPlayReleaseBundle
+          ./gradlew :plugin:tuic-v5:publishPlayReleaseBundle

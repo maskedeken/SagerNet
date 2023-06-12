@@ -2,7 +2,7 @@
 
 source "bin/init/env.sh"
 
-CURR="plugin/tuic"
+CURR="plugin/tuic-v5"
 CURR_PATH="$PROJECT/$CURR"
 
 ROOT="$CURR_PATH/src/main/jniLibs"
