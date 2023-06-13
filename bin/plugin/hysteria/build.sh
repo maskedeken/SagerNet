@@ -12,4 +12,4 @@ ROOT="$CURR_PATH/src/main/jniLibs"
 OUTPUT="hysteria"
 LIB_OUTPUT="lib$OUTPUT.so"
 
-cd $CURR_PATH/src/main/go/hysteria/app
+cd $CURR_PATH/src/main/go/hysteria
