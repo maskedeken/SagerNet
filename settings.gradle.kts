@@ -14,6 +14,7 @@ when {
         include(":plugin:brook")
         include(":plugin:trojan-go")
         include(":plugin:hysteria")
+        include(":plugin:hysteria-v2")
         include(":plugin:mieru")
         include(":plugin:tuic-v5")
     }

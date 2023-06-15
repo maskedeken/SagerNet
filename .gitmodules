@@ -37,3 +37,7 @@
 [submodule "plugin/tuic-v5/src/main/rust/tuic"]
 	path = plugin/tuic-v5/src/main/rust/tuic
 	url = https://github.com/maskedeken/tuic
+[submodule "plugin/hysteria-v2/src/main/go/hysteria"]
+	path = plugin/hysteria-v2/src/main/go/hysteria
+	url = https://github.com/apernet/hysteria
+	branch = wip-hy2
